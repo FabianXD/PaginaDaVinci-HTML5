@@ -329,9 +329,82 @@ a:active {
     color: #000000;
     text-align: center;
 }
+.imgnoticia {
+    align-content: center;
+    width: 95%;
+    height: auto;
+    border: 0px;
+}
 
 
-/* ==========================================================================
+/*
+.items {
+    font-family: "Trebuchet MS";
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #831A38;
+    background-position: left;
+    text-align: left;
+}
+
+.titulo_noticias3 {
+    text-align: left;
+    font-family: "Trebuchet MS";
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #FF6600;
+}
+
+.bajada {
+    font-family: "Trebuchet MS";
+    font-size: 11px;
+    font-weight: normal;
+    color: #666666;
+    text-align: center;
+}
+
+.titulo_noticia {
+    font-family: "Trebuchet MS";
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 12px;
+    text-align: left;
+}
+
+.txt_noticias {
+    font-family: "Trebuchet MS";
+    font-size: 11px;
+    color: #FFFFFF;
+    text-align: left;
+    font-weight: normal;
+}
+
+.txt_noticiaschico {
+    font-family: "Trebuchet MS";
+    font-size: 10px;
+    color: #6C938D;
+    text-align: left;
+    font-weight: normal;
+    line-height: 11px;
+}
+
+.Estilo1 {
+    font-family: "Trebuchet MS";
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #336666;
+    text-align: left;
+}
+
+.Estilo9 {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+*/
+ /*==========================================================================
    Helper classes
    ========================================================================== */
 
