@@ -1,11 +1,11 @@
 {
-"name": "Leonardo Da Vinci School - Pitrufquen",
-"short_name": "Leonardo Da Vinci School",
-"description": "Leonardo Da Vinci School",
-"lang": "es",
-"display": "standalone",
+    "name": "Leonardo Da Vinci School - Pitrufquen",
+    "short_name": "Leonardo Da Vinci School",
+    "description": "Leonardo Da Vinci School - Pitrufquen",
+    "lang": "es",
+    "display": "standalone",
     "icons": [{
-        "src": "icon.png",
+        "src": "favicon.png",
         "sizes": "192x192",
         "type": "image/png"
     }],
