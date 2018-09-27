@@ -283,6 +283,12 @@ a:active {
 .tdnoticia {
     vertical-align: top;
     width: 100%;
+    text-align: left;
+}
+
+.left {
+    text-align: left;
+    align-content: left;
 }
 
 .tdnoticiai {
@@ -345,6 +351,25 @@ a:active {
 }
 
 #contenedornoticia {
+    text-align: center;
+}
+
+.imgtitulo {
+    width: 20%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titulonoticia {
+    width: 75%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#contenedornoticiai {
     background-color: #831A38;
     text-align: center;
 }

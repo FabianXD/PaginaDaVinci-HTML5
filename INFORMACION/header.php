@@ -1,6 +1,3 @@
-<!doctype html>
-<html lang="es">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -9,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="manifest" href="site.webmanifest">
     <link href="favicon.png" rel="icon" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="favicon.png">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="apple-touch-icon" href="../favicon.png">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
@@ -25,7 +22,7 @@
                 <td>
                     <nav id="menu">
                         <ul class="navtop">
-                            <li><img src="img/logo1.jpg" class="plogo" alt="error"></li>
+                            <li><img src="../img/logo1.jpg" class="plogo" alt="error"></li>
                             <li><a href="#">&nbsp;Portada</a></li>
                             <li><a href="#">&nbsp;&nbsp;Leonardo Da Vinci School </a>
                                 <ul>
@@ -73,20 +70,20 @@
                             <!-- icono de la pagina -->
                             <tr>
                                 <td colspan="2">
-                                    <a href="index.htm"> <img src="img/logo.jpg" class="imginicio" alt="error"> </a>
+                                    <a href="index.htm"> <img src="../img/logo.jpg" class="imginicio" alt="error"> </a>
                                 </td>
                             </tr>
                             <!-- logo da vinci  -->
-                            <tr>
+                            <!-- <tr>
                                 <td colspan="2">
-                                    <a href="index.htm"><img src="img/vineta.jpg" class="imginicio" alt="error"></a>
+                                    <a href="index.htm"><img src="../img/vineta.jpg" class="imginicio" alt="error"></a>
                                 </td>
-                            </tr>
+                            </tr> -->
                             <!-- menu lareral -->
                             <tr>
                                 <td id="menulateral">
                                     <nav>
-                                        <a href="index.htm"><img src="img/comunidad.jpg" class="menulaterallogo" alt="error"></a>
+                                        <a href="index.htm"><img src="../img/comunidad.jpg" class="menulaterallogo" alt="error"></a>
                                         <div class="navlateral">
                                             <ul class="navlateral">
                                                 <li><a href="CALENDARIO">Calendario</a></li>
@@ -102,74 +99,11 @@
                                             </ul>
                                         </div>
                                         <br>
-                                        <a href="https://www.sistemadeadmisionescolar.cl/"><img src="img/banner_sae.jpg" class="imglateral" alt="error"></a>
-                                        <a href="http://www.demre.cl/"><img src="img/banner_demre.gif" class="imglateral" alt="error"></a>
-                                        <a href="http://www.icarito.cl"><img src="img/banner_icarito.gif" class="imglateral" alt="error"></a>
-                                        <a href="http://www.rae.es/"><img src="img/banner_rae.gif" class="imglateral" alt="error"></a>
-                                        <a href="http://www.educarchile.cl/ech/pro/app/home"><img src="img/banner_educarchile.gif" class="imglateral" alt="error"></a>
+                                        <a href="https://www.sistemadeadmisionescolar.cl/"><img src="../img/banner_sae.jpg" class="imglateral" alt="error"></a>
+                                        <a href="http://www.demre.cl/"><img src="../img/banner_demre.gif" class="imglateral" alt="error"></a>
+                                        <a href="http://www.icarito.cl"><img src="../img/banner_icarito.gif" class="imglateral" alt="error"></a>
+                                        <a href="http://www.rae.es/"><img src="../img/banner_rae.gif" class="imglateral" alt="error"></a>
+                                        <a href="http://www.educarchile.cl/ech/pro/app/home"><img src="../img/banner_educarchile.gif" class="imglateral" alt="error"></a>
                                     </nav>
                                 </td>
                                 <!-- fin encabesado -->
-                                <!-- php para cabesera de pagina <?php include('header1.php'); ?> -->
-                                <td class="tdnoticiai">
-                                    <main>
-                                        <article id="contenedornoticiai">
-                                            <div class="noti3">
-                                                <span class="txt_noticias Estilo8">agosto 2018<br></span>
-                                                <span class="titulo_noticia">TALLER DE PINTURA AL OLEO PARA APODERADOS<br></span>
-                                                <img src="\NOTICIA\2018\IMG\34_PINTURA_APODERADOS\11.jpg" alt="" class="imgindex">
-                                                <span><a href="2018_noticia_34.html"><img src="img\ver_mas.jpg" alt="" class="imgver" width="50" height="15" ></a></span>
-                                            </div>
-                                            <div class="noti3">
-                                                <span class="txt_noticias Estilo8">agosto 2018<br></span>
-                                                <span class="titulo_noticia">TALLER DE PINTURA AL OLEO PARA APODERADOS<br></span>
-                                                <img src="\NOTICIA\2018\IMG\34_PINTURA_APODERADOS\11.jpg" alt="" class="imgindex">
-                                                <span><a href="2018_noticia_34.html"><img src="img\ver_mas.jpg" alt="" class="imgver" width="50" height="15" ></a></span>
-                                            </div>
-                                            <div class="noti3">
-                                                <span class="txt_noticias Estilo8">agosto 2018<br></span>
-                                                <span class="titulo_noticia">TALLER DE PINTURA AL OLEO PARA APODERADOS<br></span>
-                                                <img src="\NOTICIA\2018\IMG\34_PINTURA_APODERADOS\11.jpg" alt="" class="imgindex">
-                                                <span><a href="2018_noticia_34.html"><img src="img\ver_mas.jpg" alt="" class="imgver" width="50" height="15" ></a></span>
-                                            </div>
-                                        </article>
-                                    </main>
-                                </td>
-                            </tr>
-                            <!-- php para pie de pagina <?php include('piep.php'); ?> -->
-                            <!-- pie de pagina -->
-                            <tr>
-                                <footer>
-                                    <td>
-                                        <a href="CONTACTOS"><img src="img/icono_contacto.jpg" id="imgcontacto" alt="error"></a>
-                                    </td>
-                                    <td>
-                                        <p id="textofin">Francisco Bilbao 1720 - Pitrufquén - Fono Fax: 45- 39 25 89 - e-mail: <a href="contacto.htm">ldavincischool@gmail.com</a></p>
-                                    </td>
-                                </footer>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <!--pagina fin  -->
-    <!--script de pagina -->
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
-    <!-- Google Analytics: change UA-126181990-1 to be your site's ID. 
-    <script>
-        window.ga = function() {
-            ga.q.push(arguments)
-        };
-        ga.q = [];
-        ga.l = +new Date;
-        ga('create', 'UA-126181990-1', 'auto');
-        ga('send', 'pageview')
-    </script>
-    <script src="https://www.google-analytics.com/analytics.js" async defer></script>-->
-    <!-- fin pie de pagina -->
-</body>
-
-</html>
