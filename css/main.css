@@ -285,6 +285,13 @@ a:active {
     width: 100%;
 }
 
+.tdnoticiai {
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+    background-color: #831A38;
+}
+
 #tablanoticia {
     vertical-align: top;
     width: 100%;
@@ -337,8 +344,34 @@ a:active {
     border: 0px;
 }
 
+#contenedornoticia {
+    background-color: #831A38;
+    text-align: center;
+}
 
-/*
+.noti3 {
+    width: 30%;
+    height: auto;
+    border: solid 7px #831A38;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.imgindex {
+    width: 100%;
+    height: 120px;
+}
+
+.imgver {
+    width: 50px;
+    height: 15px;
+}
+
+
+/* css pagina anterior */
+
 .items {
     font-family: "Trebuchet MS";
     font-size: 11px;
@@ -404,7 +437,6 @@ a:active {
     color: #FFFFFF;
     font-weight: bold;
 }
-*/
 
 
 /*==========================================================================
