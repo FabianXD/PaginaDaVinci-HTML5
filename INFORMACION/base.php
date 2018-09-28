@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es">
-<?php include('header.php'); ?>
+<?php include('../php/header.php'); ?>
 <td class="tdnoticia">
     <main>
         <article id="contenedornoticia">
@@ -10,5 +10,5 @@
 </td>
 </tr>
 <!-- php para pie de pagina -->
-<?php include('pie.php'); ?>
+<?php include('../php/pie.php'); ?>
 </html>
