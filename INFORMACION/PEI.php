@@ -1,33 +1,5 @@
 <!doctype html>
 <html lang="es">
-<?php include('../php/header.php'); ?>
-<td class="tdnoticia">
-    <main>
-        <article id="contenedornoticia">
-            <div class="imgtitulo">
-                <img src="IMG/icono_titulo.jpg" alt="" srcset="">
-            </div>
-            <div class="titulonoticia noticia">
-                <p><h3>CONTACTO</h3></p>
-            </div>
-
-            <div class="tdnoticia">
-                <b>Contacto general:</b><br>
-                <a href="mail.e-mail: ldavincischool@gmail.com">e-mail: ldavincischool@gmail.com</a><br>
-                Francisco Bilbao 1720 <br>
-                Pitrufquén <br>
-                Fono Fax: 45 - 39 25 89 <br>
-            </div>
-        </article>
-    </main>
-</td>
-</tr>
-<!-- php para pie de pagina -->
-<?php include('../php/pie.php'); ?>
-</html>
-
-<!doctype html>
-<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -41,23 +13,24 @@
 </head>
 
 <body>
-<?php include('../php/header.php'); ?>
+<?php include('../php/header.php'); ?> 
 <td class="tdnoticia">
     <main>
         <article id="contenedornoticia">
+            <!-- imagen de noticia -->
             <div class="imgtitulo">
                 <img src="IMG/icono_titulo.jpg" alt="" srcset="">
             </div>
-            <div class="titulonoticia noticia">
-                <p>CONTACTO</p>
+            <!-- titulo de noticia -->
+            <div class="noticia">
+                <p><h3>PROYECTO EDUCATIVO INSTITUCIONAL</h3></p>
             </div>
-
+            <!-- contenido de la noticia -->
             <div class="tdnoticia">
-                <b>Contacto general:</b><br>
-                <a href="mail.e-mail: ldavincischool@gmail.com">e-mail: ldavincischool@gmail.com</a><br>
-                Francisco Bilbao 1720 <br>
-                Pitrufquén <br>
-                Fono Fax: 45 - 39 25 89 <br>
+                <img src="../IMG/pdf.jpg" alt="" class="flatleft">
+                <a href="DOC/PEI.pdf" target="_blank">Descargar Proyecto Educativo Institucional</a> <br><br>
+                <img src="../IMG/pdf.jpg" alt="" class="flatleft">
+                <a href="DOC/PLANDEESTUDIO.pdf" target="_blank">Descargar Plan de Estudio 2017</a>
             </div>
         </article>
     </main>
