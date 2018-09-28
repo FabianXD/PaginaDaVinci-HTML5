@@ -23,7 +23,7 @@
                     <nav id="menu">
                         <ul class="navtop">
                             <li><img src="../img/logo1.jpg" class="plogo" alt="error"></li>
-                            <li><a href="#">&nbsp;Portada</a></li>
+                            <li><a href="index.html">&nbsp;Portada</a></li>
                             <li><a href="#">&nbsp;&nbsp;Leonardo Da Vinci School </a>
                                 <ul>
                                     <li><a href="QUIENES_SOMOS">&nbsp;&bull;&nbsp;&nbsp;Quienes Somos</a></li>
