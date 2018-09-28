@@ -28,9 +28,11 @@
             <!-- contenido de la noticia -->
             <div class="tdnoticia">
                 <img src="../IMG/pdf.jpg" alt="" class="flatleft">
-                <a href="DOC/PEI/PEI.pdf" target="_blank">Descargar Proyecto Educativo Institucional</a> <br><br>
+                <a href="DOC/PEI.pdf" target="_blank">Descargar Reglamento de Evaluación y Promoción</a><br><br>
                 <img src="../IMG/pdf.jpg" alt="" class="flatleft">
-                <a href="DOC/PEI/PLANDEESTUDIO.pdf" target="_blank">Descargar Plan de Estudio 2017</a>
+                <a href="DOC/PLANDEESTUDIO.pdf" target="_blank">Descargar Confirmación Lectura del Reglamento</a><br><br>
+                <img src="../IMG/pdf.jpg" alt="" class="flatleft">
+                <a href="DOC/PLANDEESTUDIO.pdf" target="_blank">Descargar Reglamento Convivencia Escolar</a><br><br>
             </div>
         </article>
     </main>
