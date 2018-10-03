@@ -7,13 +7,13 @@
     <meta name="description" content="LEONARDO DA VINCI SCHOOL es un establecimiento educacional mixto, diurno, particular subvencionado, con jornada escolar completa, cuya modalidad de enseñanza es científica - humanista, con énfasis en el idioma Inglés. Imparte educación Pre-básica, Básica y Media, centrada en el respeto a la persona. Está ubicado en la avenida Francisco Bilbao 1720 de la ciudad de Pitrufquén, Novena Región de la Araucanía.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="manifest" href="site.webmanifest">
-    <link href="favicon.png" rel="icon" type="image/x-icon" />
+    <link href="../favicon.png" rel="icon" type="image/x-icon" />
     <link rel="apple-touch-icon" href="../favicon.png">
     <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
-<?php include('../php/header.php'); ?> 
+<?php include('../php/header.php'); ?>
 <td class="tdnoticia">
     <main>
         <article id="contenedornoticia">
