@@ -307,7 +307,7 @@ a:active {
 .noticia {
     text-align: left;
     font-family: "Trebuchet MS";
-    font-size: 18px;
+    font-size: 16px;
     text-transform: uppercase;
     color: #336666;
     width: 75%;
@@ -319,7 +319,7 @@ a:active {
 .titulo_noticias3 {
     text-align: left;
     font-family: "Trebuchet MS";
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
     color: #FF6600;
@@ -328,7 +328,7 @@ a:active {
 .texto {
     text-align: justify;
     font-family: "Trebuchet MS";
-    font-size: 12px;
+    font-size: 14px;
     font-weight: normal;
     color: #333333;
 }
@@ -406,6 +406,31 @@ a:active {
 
 .flatleft {
     float: left;
+}
+
+.diven1 {
+    width: 40%;
+    height: auto;
+    float: left;
+}
+
+.divgris {
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    background-color: #e0dada;
+    margin: 5px;
+}
+
+.diven2 {
+    width: 60%;
+    height: auto;
+    float: left;
+}
+
+.imguniforme {
+    width: 90%;
+    height: auto;
 }
 
 
