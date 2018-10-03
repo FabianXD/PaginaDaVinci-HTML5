@@ -433,6 +433,39 @@ a:active {
     height: auto;
 }
 
+.sicolor {
+    background-color: #FFEBDD;
+}
+
+.tablaremar {
+    text-align: left;
+    border-radius: 20px 20px 20px 20px;
+    -moz-border-radius: 20px 20px 20px 20px;
+    -webkit-border-radius: 20px 20px 20px 20px;
+    border: 5px solid #831A38;
+    background-color: #FFEBDD;
+    width: 100%;
+}
+
+.tablaremar td {
+    font-size: 12px;
+    text-align: left;
+    border: 1px solid #831A38;
+    width: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.textalingcenter {
+    font-size: 14px;
+    text-align: center;
+}
+
+.imgextra {
+    width: 95%;
+    height: auto;
+}
+
 
 /* css pagina anterior */
 
