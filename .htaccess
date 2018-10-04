@@ -1,21 +1,44 @@
 # Apache Server Configs v3.0.0 | MIT License
 # https://github.com/h5bp/server-configs-apache
 
-# (!) Using `.htaccess` files slows down Apache, therefore, if you have
-# access to the main server configuration file (which is usually called
-# `httpd.conf`), you should add this logic there.
+# (!) El uso de archivos `.htaccess` ralentiza Apache, por lo tanto, si tiene
+# acceso al archivo de configuración del servidor principal (que generalmente se llama
+# `httpd.conf`), deberías agregar esta lógica allí.
 #
 # https://httpd.apache.org/docs/current/howto/htaccess.html
+
+# ----------------------------------------------------------------------
+# | ocultar extensión de página web HTML Y PHP                         |
+# ----------------------------------------------------------------------
+
+# líneas de código que quitan las extensiones HTML Y PHP
+
+<IfModule mod_rewrite.c>
+    
+    RewriteEngine on
+    
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*)$ $1.php
+    #RewriteRule ^([a-z]+)/?$ $1.php [NC]
+    
+    
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.*)$ $1.html
+    #RewriteRule ^([a-z]+)/?$ $1.html [NC]
+    
+</IfModule>
 
 # ######################################################################
 # # CROSS-ORIGIN                                                       #
 # ######################################################################
 
 # ----------------------------------------------------------------------
-# | Cross-origin requests                                              |
+# | Solicitudes de origen cruzado                                      |
 # ----------------------------------------------------------------------
 
-# Allow cross-origin requests.
+# Permitir solicitudes de origen cruzado.
 #
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 # https://enable-cors.org/
@@ -26,10 +49,10 @@
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | Cross-origin images                                                |
+# | Imágenes de origen cruzado                                         |
 # ----------------------------------------------------------------------
 
-# Send the CORS header for images when browsers request it.
+# Envíe el encabezado CORS para las imágenes cuando los navegadores lo soliciten.
 #
 # https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
 # https://blog.chromium.org/2011/07/using-cross-domain-images-in-webgl-and.html
@@ -44,10 +67,10 @@
 </IfModule>
 
 # ----------------------------------------------------------------------
-# | Cross-origin web fonts                                             |
+# | Fuentes web de origen cruzado                                      |
 # ----------------------------------------------------------------------
 
-# Allow cross-origin access to web fonts.
+# Permitir el acceso de origen cruzado a las fuentes web.
 
 <IfModule mod_headers.c>
     <FilesMatch "\.(eot|otf|tt[cf]|woff2?)$">
@@ -56,15 +79,15 @@
 </IfModule>
 
 # ----------------------------------------------------------------------
-# | Cross-origin resource timing                                       |
+# | Tiempo de recursos de origen cruzado                               |
 # ----------------------------------------------------------------------
 
-# Allow cross-origin access to the timing information for all resources.
+# Permitir el acceso de origen cruzado a la información de tiempo para todos los recursos.
 #
-# If a resource isn't served with a `Timing-Allow-Origin` header that
-# would allow its timing information to be shared with the document,
-# some of the attributes of the `PerformanceResourceTiming` object will
-# be set to zero.
+# Si un recurso no se sirve con un encabezado `Timing-Allow-Origin` que
+# permitiría que su información de sincronización se comparta con el documento,
+# algunos de los atributos del objeto `PerformanceResourceTiming`
+# establecer en cero.
 #
 # https://www.w3.org/TR/resource-timing/
 # http://www.stevesouders.com/blog/2014/08/21/resource-timing-practical-tips/
@@ -74,26 +97,26 @@
 # </IfModule>
 
 # ######################################################################
-# # ERRORS                                                             #
+# # ERRORES                                                            #
 # ######################################################################
 
 # ----------------------------------------------------------------------
-# | Custom error messages/pages                                        |
+# | Páginas de mensajes de error personalizados                        |
 # ----------------------------------------------------------------------
 
-# Customize what Apache returns to the client in case of an error.
+# Personalice lo que Apache devuelve al cliente en caso de error.
 # https://httpd.apache.org/docs/current/mod/core.html#errordocument
 
 ErrorDocument 404 /404.html
 
 # ----------------------------------------------------------------------
-# | Error prevention                                                   |
+# | Prevención de errores                                              |
 # ----------------------------------------------------------------------
 
-# Disable the pattern matching based on filenames.
+# Deshabilitar la coincidencia de patrones en función de los nombres de archivo.
 #
-# This setting prevents Apache from returning a 404 error as the result
-# of a rewrite when the directory with the same name does not exist.
+# Esta configuración evita que Apache devuelva un error 404 como resultado
+# de una reescritura cuando el directorio con el mismo nombre no existe.
 #
 # https://httpd.apache.org/docs/current/content-negotiation.html#multiviews
 
@@ -104,41 +127,41 @@ Options -MultiViews
 # ######################################################################
 
 # ----------------------------------------------------------------------
-# | Document modes                                                     |
+# | Modos de documentos                                                |
 # ----------------------------------------------------------------------
 
-# Force Internet Explorer 8/9/10 to render pages in the highest mode
-# available in the various cases when it may not.
+# Forzar Internet Explorer 8/9/10 para representar páginas en el modo más alto
+# disponible en los diversos casos en los que puede que no.
 #
 # https://hsivonen.fi/doctype/#ie8
 #
-# (!) Starting with Internet Explorer 11, document modes are deprecated.
-# If your business still relies on older web apps and services that were
-# designed for older versions of Internet Explorer, you might want to
-# consider enabling `Enterprise Mode` throughout your company.
+# (!) Comenzando con Internet Explorer 11, los modos de documento están en desuso.
+# Si su empresa todavía depende de aplicaciones y servicios web antiguos que
+# diseñado para versiones anteriores de Internet Explorer, es posible que desee
+# considere habilitar `Modo de empresa 'en toda su empresa.
 #
 # https://msdn.microsoft.com/en-us/library/ie/bg182625.aspx#docmode
 # https://blogs.msdn.microsoft.com/ie/2014/04/02/stay-up-to-date-with-enterprise-mode-for-internet-explorer-11/
 
-<IfModule mod_headers.c>
+#<IfModule mod_headers.c>
+#
+#    Header set X-UA-Compatible "IE=edge"
+#
+#    # `mod_headers` no puede coincidir en función del tipo de contenido, sin embargo,
+    # el encabezado de respuesta `X-UA-Compatible` se debe enviar solo para
+    # Documentos HTML y no para los demás recursos.
 
-    Header set X-UA-Compatible "IE=edge"
+#    <FilesMatch "\.(appcache|atom|bbaw|bmp|br|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|gz|htc|ic[os]|jpe?g|m?js|json(ld)?|m4[av]|manifest|map|markdown|md|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|wasm|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
+#        Header unset X-UA-Compatible
+#    </FilesMatch>
 
-    # `mod_headers` cannot match based on the content-type, however,
-    # the `X-UA-Compatible` response header should be send only for
-    # HTML documents and not for the other resources.
-
-    <FilesMatch "\.(appcache|atom|bbaw|bmp|br|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|gz|htc|ic[os]|jpe?g|m?js|json(ld)?|m4[av]|manifest|map|markdown|md|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|wasm|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
-        Header unset X-UA-Compatible
-    </FilesMatch>
-
-</IfModule>
+#</IfModule>
 
 # ----------------------------------------------------------------------
 # | Iframes cookies                                                    |
 # ----------------------------------------------------------------------
 
-# Allow cookies to be set from iframes in Internet Explorer.
+# Permita que las cookies se establezcan desde iframes en Internet Explorer.
 #
 # https://msdn.microsoft.com/en-us/library/ms537343.aspx
 # https://www.w3.org/TR/2000/CR-P3P-20001215/
@@ -148,14 +171,14 @@ Options -MultiViews
 # </IfModule>
 
 # ######################################################################
-# # MEDIA TYPES AND CHARACTER ENCODINGS                                #
+# # TIPOS DE MEDIOS Y CODIFICACIONES DE CARACTERES                     #
 # ######################################################################
 
 # ----------------------------------------------------------------------
-# | Media types                                                        |
+# | Tipos de medios                                                    |
 # ----------------------------------------------------------------------
 
-# Serve resources with the proper media types (f.k.a. MIME types).
+# Servir recursos con los tipos de medios adecuados (f.k.a tipos MIME).
 #
 # https://www.iana.org/assignments/media-types/media-types.xhtml
 # https://httpd.apache.org/docs/current/mod/mod_mime.html#addtype
@@ -174,7 +197,7 @@ Options -MultiViews
 
   # JavaScript
 
-    # Servers should use text/javascript for JavaScript resources.
+    # Los servidores deben usar texto / javascript para recursos de JavaScript.
     # https://html.spec.whatwg.org/multipage/scripting.html#scriptingLanguages
 
     AddType text/javascript                             js mjs
@@ -199,8 +222,8 @@ Options -MultiViews
     AddType video/webm                                  webm
     AddType video/x-flv                                 flv
 
-    # Serving `.ico` image files with a different media type
-    # prevents Internet Explorer from displaying them as images:
+    # Sirviendo archivos de imagen `.ico` con un tipo de medio diferente
+    # impide que Internet Explorer los muestre como imágenes:
     # https://github.com/h5bp/html5-boilerplate/commit/37b5fec090d00f38de64b591bcddcb205aadf8ee
 
     AddType image/x-icon                                cur ico
@@ -238,11 +261,11 @@ Options -MultiViews
 </IfModule>
 
 # ----------------------------------------------------------------------
-# | Character encodings                                                |
+# | Codificaciones de caracteres                                       |
 # ----------------------------------------------------------------------
 
-# Serve all resources labeled as `text/html` or `text/plain`
-# with the media type `charset` parameter set to `UTF-8`.
+# Sirve todos los recursos etiquetados como `text / html` o` text / plain`
+# con el tipo de medio del parámetro `charset` establecido en` UTF-8`.
 #
 # https://httpd.apache.org/docs/current/mod/core.html#adddefaultcharset
 
@@ -250,8 +273,8 @@ AddDefaultCharset utf-8
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# Serve the following file types with the media type `charset`
-# parameter set to `UTF-8`.
+# Sirve los siguientes tipos de archivos con el tipo de medio `charset`
+# parámetro establecido en `UTF-8`.
 #
 # https://httpd.apache.org/docs/current/mod/mod_mime.html#addcharset
 
@@ -279,73 +302,73 @@ AddDefaultCharset utf-8
 </IfModule>
 
 # ######################################################################
-# # REWRITES                                                           #
+# # REESCRIBE                                                          #
 # ######################################################################
 
 # ----------------------------------------------------------------------
-# | Rewrite engine                                                     |
+# | Reescribir el motor                                                |
 # ----------------------------------------------------------------------
 
-# (1) Turn on the rewrite engine (this is necessary in order for
-#     the `RewriteRule` directives to work).
+# (1) Encienda el motor de reescritura (esto es necesario para
+# las directivas `RewriteRule` para funcionar).
 #
 #     https://httpd.apache.org/docs/current/mod/mod_rewrite.html#RewriteEngine
 #
-# (2) Enable the `FollowSymLinks` option if it isn't already.
+# (2) Habilite la opción `FollowSymLinks` si aún no lo está.
 #
 #     https://httpd.apache.org/docs/current/mod/core.html#options
 #
-# (3) If your web host doesn't allow the `FollowSymlinks` option,
-#     you need to comment it out or remove it, and then uncomment
-#     the `Options +SymLinksIfOwnerMatch` line (4), but be aware
-#     of the performance impact.
+# (3) Si su servidor web no permite la opción `FollowSymlinks`,
+# necesita comentarlo o eliminarlo, y luego descomentar
+# la línea `Options + SymLinksIfOwnerMatch` (4), pero tenga en cuenta
+# del impacto en el rendimiento.
 #
 #     https://httpd.apache.org/docs/current/misc/perf-tuning.html#symlinks
 #
-# (4) Some cloud hosting services will require you set `RewriteBase`.
+# (4) Algunos servicios de alojamiento en la nube requerirán que establezcas `RewriteBase`.
 #
 #     https://www.rackspace.com/knowledge_center/frequently-asked-question/why-is-modrewrite-not-working-on-my-site
 #     https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewritebase
 #
-# (5) Depending on how your server is set up, you may also need to
-#     use the `RewriteOptions` directive to enable some options for
-#     the rewrite engine.
+# (5) Dependiendo de cómo esté configurado su servidor, es posible que también necesite
+# usa la directiva `RewriteOptions` para habilitar algunas opciones para
+# el motor de reescritura.
 #
 #     https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriteoptions
 #
-# (6) Set %{ENV:PROTO} variable, to allow rewrites to redirect with the
-#     appropriate schema automatically (http or https).
+# (6) Configure la variable% {ENV: PROTO}, para permitir que las reescrituras redirijan con el
+# esquema apropiado automáticamente (http o https).
 
-<IfModule mod_rewrite.c>
-
-    # (1)
-    RewriteEngine On
-
-    # (2)
-    Options +FollowSymlinks
-
-    # (3)
-    # Options +SymLinksIfOwnerMatch
-
-    # (4)
-    # RewriteBase /
-
-    # (5)
-    # RewriteOptions <options>
-
-    # (6)
-    RewriteCond %{HTTPS} =on
-    RewriteRule ^ - [env=proto:https]
-    RewriteCond %{HTTPS} !=on
-    RewriteRule ^ - [env=proto:http]
-
-</IfModule>
+#<IfModule mod_rewrite.c>
+#
+#    # (1)
+#    RewriteEngine On
+#
+#    # (2)
+#    Options +FollowSymlinks
+#
+#    # (3)
+#    # Options +SymLinksIfOwnerMatch
+#
+#    # (4)
+#    # RewriteBase /
+#
+#    # (5)
+#    # RewriteOptions <options>
+#
+#    # (6)
+#    RewriteCond %{HTTPS} =on
+#    RewriteRule ^ - [env=proto:https]
+#    RewriteCond %{HTTPS} !=on
+#    RewriteRule ^ - [env=proto:http]
+#
+#</IfModule>
 
 # ----------------------------------------------------------------------
-# | Forcing `https://`                                                 |
+# | Forzando `https: //`                                               |
 # ----------------------------------------------------------------------
 
-# Redirect from the `http://` to the `https://` version of the URL.
+# Redirigir de la `http: //` a la versión `https: //` de la URL.
 # https://wiki.apache.org/httpd/RewriteHTTPToHTTPS
 
 # <IfModule mod_rewrite.c>
@@ -355,57 +378,57 @@ AddDefaultCharset utf-8
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | Suppressing the `www.` at the beginning of URLs                    |
+# | Suprimir el `www.` al comienzo de las URL                          |
 # ----------------------------------------------------------------------
 
-# Rewrite www.example.com → example.com
+# Reescribir www.example.com → example.com
 
-# The same content should never be available under two different
-# URLs, especially not with and without `www.` at the beginning.
-# This can cause SEO problems (duplicate content), and therefore,
-# you should choose one of the alternatives and redirect the other
-# one.
+# El mismo contenido nunca debería estar disponible en dos diferentes
+# URLs, especialmente no con y sin `www.` al principio.
+# Esto puede causar problemas de SEO (contenido duplicado), y por lo tanto,
+# debes elegir una de las alternativas y redirigir la otra
+# uno.
 #
-# (!) NEVER USE BOTH WWW-RELATED RULES AT THE SAME TIME!
+# (!) NUNCA USE AMBAS REGLAS RELACIONADAS CON LA WWW AL MISMO TIEMPO!
 
-# (1) The rule assume by default that both HTTP and HTTPS
-#     environments are available for redirection.
-#     If your SSL certificate could not handle one of the domains
-#     used during redirection, you should turn the condition on.
+# (1) La regla supone por defecto que tanto HTTP como HTTPS
+# entornos están disponibles para la redirección.
+# Si su certificado SSL no pudo manejar uno de los dominios
+# utilizado durante la redirección, debe activar la condición.
+#
+#https://github.com/h5bp/server-configs-apache/issues/52
+
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#    # (1)
+#    # RewriteCond %{HTTPS} !=on
+#    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#    RewriteRule ^ %{ENV:PROTO}://%1%{REQUEST_URI} [R=301,L]
+#</IfModule>
+
+# ----------------------------------------------------------------------
+# | Forzar el `www.` al comienzo de las URL                            |
+# ----------------------------------------------------------------------
+
+# Reescribir example.com → www.example.com
+
+# El mismo contenido nunca debería estar disponible en dos diferentes
+# URLs, especialmente no con y sin `www.` al principio.
+# Esto puede causar problemas de SEO (contenido duplicado), y por lo tanto,
+# debes elegir una de las alternativas y redirigir la otra
+# uno.
+#
+# (!) NUNCA USE AMBAS REGLAS RELACIONADAS CON LA WWW AL MISMO TIEMPO!
+
+# (1) La regla supone por defecto que tanto HTTP como HTTPS
+# entornos están disponibles para la redirección.
+# Si su certificado SSL no pudo manejar uno de los dominios
+# utilizado durante la redirección, debe activar la condición.
 #
 #     https://github.com/h5bp/server-configs-apache/issues/52
 
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    # (1)
-    # RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-    RewriteRule ^ %{ENV:PROTO}://%1%{REQUEST_URI} [R=301,L]
-</IfModule>
-
-# ----------------------------------------------------------------------
-# | Forcing the `www.` at the beginning of URLs                        |
-# ----------------------------------------------------------------------
-
-# Rewrite example.com → www.example.com
-
-# The same content should never be available under two different
-# URLs, especially not with and without `www.` at the beginning.
-# This can cause SEO problems (duplicate content), and therefore,
-# you should choose one of the alternatives and redirect the other
-# one.
-#
-# (!) NEVER USE BOTH WWW-RELATED RULES AT THE SAME TIME!
-
-# (1) The rule assume by default that both HTTP and HTTPS
-#     environments are available for redirection.
-#     If your SSL certificate could not handle one of the domains
-#     used during redirection, you should turn the condition on.
-#
-#     https://github.com/h5bp/server-configs-apache/issues/52
-
-# Be aware that the following might not be a good idea if you use "real"
-# subdomains for certain parts of your website.
+# Tenga en cuenta que lo siguiente puede no ser una buena idea si usa "real"
+# subdominios para ciertas partes de su sitio web.
 
 # <IfModule mod_rewrite.c>
 #     RewriteEngine On
@@ -418,37 +441,37 @@ AddDefaultCharset utf-8
 # </IfModule>
 
 # ######################################################################
-# # SECURITY                                                           #
+# # SEGURIDAD                                                          #
 # ######################################################################
 
 # ----------------------------------------------------------------------
 # | Clickjacking                                                       |
 # ----------------------------------------------------------------------
 
-# Protect website against clickjacking.
+# Proteger el sitio web contra clickjacking.
 #
-# The example below sends the `X-Frame-Options` response header with
-# the value `DENY`, informing browsers not to display the content of
-# the web page in any frame.
+# El siguiente ejemplo envía el encabezado de respuesta `X-Frame-Options` con
+# el valor 'DENY', que informa a los navegadores que no muestren el contenido de
+# la página web en cualquier marco.
 #
-# This might not be the best setting for everyone. You should read
-# about the other two possible values the `X-Frame-Options` header
-# field can have: `SAMEORIGIN` and `ALLOW-FROM`.
+# Esta podría no ser la mejor opción para todos. Debes leer
+# sobre los otros dos valores posibles el encabezado `X-Frame-Options`
+# field puede tener: `SAMEORIGIN` y` ALLOW-FROM`.
 # https://tools.ietf.org/html/rfc7034#section-2.1.
 #
-# Keep in mind that while you could send the `X-Frame-Options` header
-# for all of your website’s pages, this has the potential downside that
-# it forbids even non-malicious framing of your content (e.g.: when
-# users visit your website using a Google Image Search results page).
+# Tenga en cuenta que si bien puede enviar el encabezado `X-Frame-Options`
+# para todas las páginas de su sitio web, esto tiene el potencial inconveniente de
+# prohíbe incluso el encuadre no malicioso de su contenido (por ejemplo, cuando
+# usuarios visitan su sitio web usando una página de resultados de búsqueda de imágenes de Google).
 #
-# Nonetheless, you should ensure that you send the `X-Frame-Options`
-# header for all pages that allow a user to make a state changing
-# operation (e.g: pages that contain one-click purchase links, checkout
-# or bank-transfer confirmation pages, pages that make permanent
-# configuration changes, etc.).
+# No obstante, debe asegurarse de enviar las `Opciones de X-Frame`
+# encabezado para todas las páginas que permiten a un usuario hacer un cambio de estado
+# operación (por ejemplo, páginas que contienen vínculos de compra con un solo clic, pago y envío
+# o páginas de confirmación de transferencia bancaria, páginas que hacen permanente
+# cambios de configuración, etc.).
 #
-# Sending the `X-Frame-Options` header can also protect your website
-# against more than just clickjacking attacks:
+# El envío del encabezado `X-Frame-Options` también puede proteger su sitio web
+# contra algo más que ataques de clickjacking:
 # https://cure53.de/xfo-clickjacking.pdf.
 #
 # https://tools.ietf.org/html/rfc7034
@@ -457,11 +480,11 @@ AddDefaultCharset utf-8
 
 # <IfModule mod_headers.c>
 
-#     Header set X-Frame-Options "DENY"
+# Encabezado establece X-Frame-Options "DENY"
 
-#     # `mod_headers` cannot match based on the content-type, however,
-#     # the `X-Frame-Options` response header should be send only for
-#     # HTML documents and not for the other resources.
+# # `mod_headers` no puede coincidir en función del tipo de contenido, sin embargo,
+# # el encabezado de respuesta `X-Frame-Options` debe enviarse solo para
+# # Documentos HTML y no para los demás recursos.
 
 #     <FilesMatch "\.(appcache|atom|bbaw|bmp|br|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|gz|htc|ic[os]|jpe?g|m?js|json(ld)?|m4[av]|manifest|map|markdown|md|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|wasm|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
 #         Header unset X-Frame-Options
@@ -470,21 +493,21 @@ AddDefaultCharset utf-8
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | Content Security Policy (CSP)                                      |
+# | Política de seguridad de contenido (CSP)                           |
 # ----------------------------------------------------------------------
 
-# Mitigate the risk of cross-site scripting and other content-injection
-# attacks.
+# Mitigar el riesgo de secuencias de comandos entre sitios y otra inyección de contenido
+# ataques.
 #
-# This can be done by setting a `Content Security Policy` which
-# whitelists trusted sources of content for your website.
+# Esto se puede hacer configurando una `Política de seguridad de contenido` que
+# incluye en la lista de búsqueda fuentes confiables de contenido para su sitio web.
 #
-# The example header below allows ONLY scripts that are loaded from
-# the current website's origin (no inline scripts, no CDN, etc).
-# That almost certainly won't work as-is for your website!
+# El encabezado de ejemplo a continuación permite SÓLO secuencias de comandos que se cargan desde
+# el origen del sitio web actual (sin secuencias de comandos en línea, sin CDN, etc.).
+# ¡Es casi seguro que no funcionará como está para su sitio web!
 #
-# To make things easier, you can use an online CSP header generator
-# such as: http://cspisawesome.com/.
+# Para facilitar las cosas, puede usar un generador de encabezado CSP en línea
+# como: http://cspisawesome.com/.
 #
 # https://content-security-policy.com/
 # https://www.html5rocks.com/en/tutorials/security/content-security-policy/
@@ -492,11 +515,11 @@ AddDefaultCharset utf-8
 
 # <IfModule mod_headers.c>
 
-#     Header set Content-Security-Policy "script-src 'self'; object-src 'self'"
+# Encabezado establecido Content-Security-Policy "script-src 'self'; object-src 'self'"
 
-#     # `mod_headers` cannot match based on the content-type, however,
-#     # the `Content-Security-Policy` response header should be send
-#     # only for HTML documents and not for the other resources.
+# # `mod_headers` no puede coincidir en función del tipo de contenido, sin embargo,
+# # se debe enviar el encabezado de respuesta `Content-Security-Policy`
+# # solo para documentos HTML y no para los otros recursos.
 
 #     <FilesMatch "\.(appcache|atom|bbaw|bmp|br|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|gz|htc|ic[os]|jpe?g|m?js|json(ld)?|m4[av]|manifest|map|markdown|md|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|wasm|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
 #         Header unset Content-Security-Policy
@@ -505,14 +528,14 @@ AddDefaultCharset utf-8
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | File access                                                        |
+# | Acceso a archivos                                                  |
 # ----------------------------------------------------------------------
 
-# Block access to directories without a default document.
+# Bloquear el acceso a los directorios sin un documento predeterminado.
 #
-# You should leave the following uncommented, as you shouldn't allow
-# anyone to surf through every directory on your server (which may
-# includes rather private places such as the CMS's directories).
+# Debe dejar lo siguiente sin comentar, ya que no debe permitir
+# a cualquiera que navegue por todos los directorios de su servidor (que puede
+# incluye lugares bastante privados, como los directorios del CMS).
 
 <IfModule mod_autoindex.c>
     Options -Indexes
@@ -520,17 +543,17 @@ AddDefaultCharset utf-8
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# Block access to all hidden files and directories with the exception of
-# the visible content from within the `/.well-known/` hidden directory.
+# Bloquea el acceso a todos los archivos y directorios ocultos con la excepción de
+# el contenido visible desde el directorio oculto `/ .well-known /`.
 #
-# These types of files usually contain user preferences or the preserved
-# state of an utility, and can include rather private places like, for
-# example, the `.git` or `.svn` directories.
+# Estos tipos de archivos generalmente contienen preferencias del usuario o
+# estado de una utilidad, y puede incluir lugares más bien privados como, por
+# ejemplo, los directorios `.git` o` .svn`.
 #
-# The `/.well-known/` directory represents the standard (RFC 5785) path
-# prefix for "well-known locations" (e.g.: `/.well-known/manifest.json`,
-# `/.well-known/keybase.txt`), and therefore, access to its visible
-# content should not be blocked.
+# El directorio `/ .well-known /` representa la ruta estándar (RFC 5785)
+# prefijo para "ubicaciones conocidas" (p. ej .: `/ .well-known / manifest.json`,
+# `/ .well-known / keybase.txt`), y por lo tanto, el acceso a su visible
+# contenido no debe ser bloqueado.
 #
 # https://www.mnot.net/blog/2010/04/07/well-known
 # https://tools.ietf.org/html/rfc5785
@@ -545,19 +568,19 @@ AddDefaultCharset utf-8
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# Block access to files that can expose sensitive information.
+# Bloquea el acceso a los archivos que pueden exponer información confidencial.
 #
-# By default, block access to backup and source files that may be
-# left by some text editors and can pose a security risk when anyone
-# has access to them.
+# De forma predeterminada, bloquear el acceso a la copia de seguridad y los archivos de origen que pueden ser
+# dejado por algunos editores de texto y puede suponer un riesgo de seguridad cuando alguien
+# tiene acceso a ellos.
 #
 # https://feross.org/cmsploit/
 #
-# (!) Update the `<FilesMatch>` regular expression from below to
-# include any files that might end up on your production server and
-# can expose sensitive information about your website. These files may
-# include: configuration files, files that contain metadata about the
-# project (e.g.: project dependencies), build scripts, etc..
+# (!) Actualice la expresión regular `<FilesMatch>` de abajo a
+# incluye cualquier archivo que pueda terminar en su servidor de producción y
+# puede exponer información confidencial sobre su sitio web. Estos archivos pueden
+# include: archivos de configuración, archivos que contienen metadatos sobre
+# proyecto (por ejemplo, dependencias del proyecto), scripts de compilación, etc.
 
 <IfModule mod_authz_core.c>
     <FilesMatch "(^#.*#|\.(bak|conf|dist|fla|in[ci]|log|orig|psd|sh|sql|sw[op])|~)$">
@@ -566,37 +589,37 @@ AddDefaultCharset utf-8
 </IfModule>
 
 # ----------------------------------------------------------------------
-# | HTTP Strict Transport Security (HSTS)                              |
+# | Seguridad de transporte estricta de HTTP (HTTS)                    |
 # ----------------------------------------------------------------------
 
-# Force client-side SSL redirection.
+# Forzar la redirección SSL del lado del cliente.
 #
-# If a user types `example.com` in their browser, even if the server
-# redirects them to the secure version of the website, that still leaves
-# a window of opportunity (the initial HTTP connection) for an attacker
-# to downgrade or redirect the request.
+# Si un usuario escribe `example.com` en su navegador, incluso si el servidor
+# los redirecciona a la versión segura del sitio web, que aún se va
+# una ventana de oportunidad (la conexión HTTP inicial) para un atacante
+# para degradar o redirigir la solicitud.
 #
-# The following header ensures that browser will ONLY connect to your
-# server via HTTPS, regardless of what the users type in the browser's
-# address bar.
+# El siguiente encabezado asegura que el navegador SOLO se conectará a su
+# servidor a través de HTTPS, independientemente de lo que escriban los usuarios en el navegador
+# Barra de dirección.
 #
-# (!) Be aware that this, once published, is not revokable and you must ensure
-# being able to serve the site via SSL for the duration you've specified
-# in max-age. When you don't have a valid SSL connection (anymore) your
-# visitors will see a nasty error message even when attempting to connect
-# via simple HTTP.
+# (!) Tenga en cuenta que esto, una vez publicado, no es revocable y debe asegurarse
+# ser capaz de servir el sitio a través de SSL por la duración que ha especificado
+# en max-age. Cuando no tiene una conexión SSL válida (más) su
+# visitantes verán un desagradable mensaje de error incluso cuando intenten conectarse
+# a través de HTTP simple.
 #
-# (!) Remove the `includeSubDomains` optional directive if the website's
-# subdomains are not using HTTPS.
+# (!) Elimina la directiva opcional `includeSubDomains` si el sitio web
+# subdominios no usan HTTPS.
 #
-# (1) If you want to submit your site for HSTS preload (2) you must
-#     * ensure the `includeSubDomains` directive to be present
-#     * the `preload` directive to be specified
-#     * the `max-age` to be at least 31536000 seconds (1 year) according to the current status.
+# (1) Si desea enviar su sitio para la precarga de HSTS (2) debe
+# * asegurar que la directiva `includeSubDomains` esté presente
+# * la directiva `preload` a ser especificada
+# * la `max-age` es al menos 31536000 segundos (1 año) según el estado actual.
 #
-#     It is also advised (3) to only serve the HSTS header via a secure connection
-#     which can be done with either `env=https` or `"expr=%{HTTPS} == 'on'"` (4). The
-#     exact way depends on your environment and might just be tried.
+# También se recomienda (3) que solo sirva el encabezado HSTS a través de una conexión segura
+# que se puede hacer con `env = https` o` "expr =% {HTTPS} == 'on'" `(4). los
+# La forma exacta depende de tu entorno y podría intentarlo.
 #
 # https://www.html5rocks.com/en/tutorials/security/transport-layer-security/
 # https://tools.ietf.org/html/rfc6797#section-6.1
@@ -614,15 +637,15 @@ AddDefaultCharset utf-8
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | Reducing MIME type security risks                                  |
+# | Reducir los riesgos de seguridad del tipo MIME                     |
 # ----------------------------------------------------------------------
 
-# Prevent some browsers from MIME-sniffing the response.
+# Impedir que algunos navegadores MIME detecten la respuesta.
 #
-# This reduces exposure to drive-by download attacks and cross-origin
-# data leaks, and should be left uncommented, especially if the server
-# is serving user-uploaded content or content that could potentially be
-# treated as executable by the browser.
+# Esto reduce la exposición a ataques de descarga drive-by y origen cruzado
+# pérdidas de datos, y deben dejarse sin comentarios, especialmente si el servidor
+# está publicando contenido subido por el usuario o contenido que podría ser potencialmente
+# tratado como ejecutable por el navegador.
 #
 # https://www.slideshare.net/hasegawayosuke/owasp-hasegawa
 # https://blogs.msdn.microsoft.com/ie/2008/07/02/ie8-security-part-v-comprehensive-protection/
@@ -634,36 +657,36 @@ AddDefaultCharset utf-8
 </IfModule>
 
 # ----------------------------------------------------------------------
-# | Reflected Cross-Site Scripting (XSS) attacks                       |
+# | Reflejos reflejados en scripts de sitios (XSS)                     |
 # ----------------------------------------------------------------------
 
-# (1) Try to re-enable the cross-site scripting (XSS) filter built
-#     into most web browsers.
+# (1) Intente volver a habilitar el filtro de secuencias de comandos entre sitios (XSS) creado
+# en la mayoría de los navegadores web.
 #
-#     The filter is usually enabled by default, but in some cases it
-#     may be disabled by the user. However, in Internet Explorer for
-#     example, it can be re-enabled just by sending the
-#     `X-XSS-Protection` header with the value of `1`.
+# El filtro generalmente está habilitado por defecto, pero en algunos casos
+# puede ser deshabilitado por el usuario. Sin embargo, en Internet Explorer para
+# ejemplo, se puede volver a habilitar simplemente enviando el
+# Encabezado `X-XSS-Protection` con el valor de` 1`.
 #
-# (2) Prevent web browsers from rendering the web page if a potential
-#     reflected (a.k.a non-persistent) XSS attack is detected by the
-#     filter.
+# (2) Evite que los navegadores web visualicen la página web si existe un potencial
+# reflejado (a.k.a no persistente) el ataque XSS es detectado por el
+# filtro.
 #
-#     By default, if the filter is enabled and browsers detect a
-#     reflected XSS attack, they will attempt to block the attack
-#     by making the smallest possible modifications to the returned
-#     web page.
+# Por defecto, si el filtro está habilitado y los navegadores detectan un
+# reflejo del ataque XSS, intentarán bloquear el ataque
+# haciendo las modificaciones más pequeñas posibles a la devolución
+# página web.
 #
-#     Unfortunately, in some browsers (e.g.: Internet Explorer),
-#     this default behavior may allow the XSS filter to be exploited,
-#     thereby, it's better to inform browsers to prevent the rendering
-#     of the page altogether, instead of attempting to modify it.
+# Desafortunadamente, en algunos navegadores (por ejemplo: Internet Explorer),
+# este comportamiento predeterminado puede permitir que el filtro XSS sea explotado,
+# por lo tanto, es mejor informar a los navegadores para evitar la representación
+# de la página en total, en lugar de intentar modificarlo.
 #
-#     https://hackademix.net/2009/11/21/ies-xss-filter-creates-xss-vulnerabilities
+# https://hackademix.net/2009/11/21/ies-xss-filter-creates-xss-vulnerabilities
 #
-# (!) Do not rely on the XSS filter to prevent XSS attacks! Ensure that
-#     you are taking all possible measures to prevent XSS attacks, the
-#     most obvious being: validating and sanitizing your website's inputs.
+# (!) No confíe en el filtro XSS para evitar ataques XSS. Asegurarse de que
+# está tomando todas las medidas posibles para evitar los ataques XSS,
+# El ser más obvio: validar y desinfectar las entradas de su sitio web.
 #
 # https://blogs.msdn.microsoft.com/ie/2008/07/02/ie8-security-part-iv-the-xss-filter/
 # https://blogs.msdn.microsoft.com/ieinternals/2011/01/31/controlling-the-xss-filter/
@@ -674,9 +697,9 @@ AddDefaultCharset utf-8
 #     #                           (1)    (2)
 #     Header set X-XSS-Protection "1; mode=block"
 
-#     # `mod_headers` cannot match based on the content-type, however,
-#     # the `X-XSS-Protection` response header should be send only for
-#     # HTML documents and not for the other resources.
+# # `mod_headers` no puede coincidir en función del tipo de contenido, sin embargo,
+# # el encabezado de respuesta `X-XSS-Protection` debe enviarse solo para
+# # Documentos HTML y no para los demás recursos.
 
 #     <FilesMatch "\.(appcache|atom|bbaw|bmp|br|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|gz|htc|ic[os]|jpe?g|m?js|json(ld)?|m4[av]|manifest|map|markdown|md|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|wasm|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
 #         Header unset X-XSS-Protection
@@ -685,35 +708,35 @@ AddDefaultCharset utf-8
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | Referrer Policy                                                    |
+# | Política de referencia                                             |
 # ----------------------------------------------------------------------
 
-# A web application uses HTTPS and a URL-based session identifier.
-# The web application might wish to link to HTTPS resources on other
-# web sites without leaking the user's session identifier in the URL.
+# Una aplicación web utiliza HTTPS y un identificador de sesión basado en URL.
+# La aplicación web podría querer vincular a recursos HTTPS en otra
+# sitios web sin filtrar el identificador de sesión del usuario en la URL.
 #
-# This can be done by setting a `Referrer Policy` which
-# whitelists trusted sources of content for your website.
+# Esto se puede hacer configurando una `Política de referencia` que
+# incluye en la lista de búsqueda fuentes confiables de contenido para su sitio web.
 #
-# To check your referrer policy, you can use an online service
-# such as: https://securityheaders.io/.
+# Para verificar su política de referencia, puede usar un servicio en línea
+# como: https://securityheaders.io/.
 #
 # https://scotthelme.co.uk/a-new-security-header-referrer-policy/
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
 
 # <IfModule mod_headers.c>
 
-#     # no-referrer-when-downgrade (default)
-#     # This should be the user agent's default behavior if no policy is
-#     # specified.The origin is sent as referrer to a-priori as-much-secure
-#     # destination (HTTPS->HTTPS), but isn't sent to a less secure destination
-#     # (HTTPS->HTTP).
+# # no-referrer-when-downgrade (predeterminado)
+# # Este debería ser el comportamiento predeterminado del agente de usuario si no hay una política
+# # especificado. El origen se envía como referente a a-priori como-mucho-seguro
+# # destino (HTTPS-> HTTPS), pero no se envía a un destino menos seguro
+# # (HTTPS-> HTTP).
 
-#     Header set Referrer-Policy "no-referrer-when-downgrade"
+# Encabezado establecido Referrer-Policy "no-referrer-when-downgrade"
 
-#     # `mod_headers` cannot match based on the content-type, however,
-#     # the `Referrer-Policy` response header should be send
-#     # only for HTML documents and not for the other resources.
+# # `mod_headers` no puede coincidir en función del tipo de contenido, sin embargo,
+# # se debe enviar el encabezado de respuesta `Referrer-Policy`
+# # solo para documentos HTML y no para los otros recursos.
 
 #     <FilesMatch "\.(appcache|atom|bbaw|bmp|br|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|gz|htc|ic[os]|jpe?g|m?js|json(ld)?|m4[av]|manifest|map|markdown|md|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|wasm|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
 #         Header unset Referrer-Policy
@@ -722,22 +745,22 @@ AddDefaultCharset utf-8
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | Server-side technology information                                 |
+# | Información de tecnología del lado del servidor                    |
 # ----------------------------------------------------------------------
 
-# Remove the `X-Powered-By` response header that:
+# Eliminar el encabezado de respuesta `X-Powered-By` que:
 #
-#  * is set by some frameworks and server-side languages
-#    (e.g.: ASP.NET, PHP), and its value contains information
-#    about them (e.g.: their name, version number)
+# * está establecido por algunos marcos y lenguajes del lado del servidor
+# (por ejemplo, ASP.NET, PHP) y su valor contiene información
+# sobre ellos (por ejemplo, su nombre, número de versión)
 #
-#  * doesn't provide any value to users, contributes to header
-#    bloat, and in some cases, the information it provides can
-#    expose vulnerabilities
+# * no proporciona ningún valor a los usuarios, contribuye al encabezado
+# inflado, y en algunos casos, la información que proporciona puede
+# exponer vulnerabilidades
 #
-# (!) If you can, you should disable the `X-Powered-By` header from the
-# language / framework level (e.g.: for PHP, you can do that by setting
-# `expose_php = off` in `php.ini`)
+# (!) Si puede, debe desactivar el encabezado `X-Powered-By` del
+# language / framework level (por ejemplo, para PHP, puede hacer eso configurando
+# `expose_php = off` en` php.ini`)
 #
 # https://php.net/manual/en/ini.core.php#ini.expose-php
 
@@ -746,12 +769,12 @@ AddDefaultCharset utf-8
 </IfModule>
 
 # ----------------------------------------------------------------------
-# | Server software information                                        |
+# | Información del software del servidor                              |
 # ----------------------------------------------------------------------
 
-# Prevent Apache from adding a trailing footer line containing
-# information about the server to the server-generated documents
-# (e.g.: error messages, directory listings, etc.)
+# Impedir que Apache agregue una línea de pie de página posterior que contiene
+# información sobre el servidor a los documentos generados por el servidor
+# (por ejemplo, mensajes de error, listados de directorios, etc.)
 #
 # https://httpd.apache.org/docs/current/mod/core.html#serversignature
 
@@ -759,28 +782,28 @@ ServerSignature Off
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# Prevent Apache from sending in the `Server` response header its
-# exact version number, the description of the generic OS-type or
-# information about its compiled-in modules.
+# Impedir que Apache envíe el encabezado de respuesta del `Servidor`
+# número de versión exacta, la descripción del tipo de sistema operativo genérico o
+# información sobre sus módulos compilados.
 #
-# (!) The `ServerTokens` directive will only work in the main server
-# configuration file, so don't try to enable it in the `.htaccess` file!
+# (!) La directiva `ServerTokens` solo funcionará en el servidor principal
+# archivo de configuración, ¡así que no intente habilitarlo en el archivo `.htaccess`!
 #
 # https://httpd.apache.org/docs/current/mod/core.html#servertokens
 
 #ServerTokens Prod
 
 # ######################################################################
-# # WEB PERFORMANCE                                                    #
+# # RENDIMIENTO WEB                                                    #
 # ######################################################################
 
 # ----------------------------------------------------------------------
-# | Compression                                                        |
+# | Compresión                                                        |
 # ----------------------------------------------------------------------
 
 <IfModule mod_deflate.c>
 
-    # Force compression for mangled `Accept-Encoding` request headers
+    # Forzar compresión para encabezados de solicitud `Accept-Encoding` mutilados
     # https://developer.yahoo.com/blogs/ydn/pushing-beyond-gzipping-25601.html
 
     <IfModule mod_setenvif.c>
@@ -792,65 +815,65 @@ ServerSignature Off
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # Compress all output labeled with one of the following media types.
+    # Comprimir todos los resultados etiquetados con uno de los siguientes tipos de medios.
     # https://httpd.apache.org/docs/current/mod/mod_filter.html#addoutputfilterbytype
 
     <IfModule mod_filter.c>
-        AddOutputFilterByType DEFLATE "application/atom+xml" \
-                                      "application/javascript" \
-                                      "application/json" \
-                                      "application/ld+json" \
-                                      "application/manifest+json" \
-                                      "application/rdf+xml" \
-                                      "application/rss+xml" \
-                                      "application/schema+json" \
-                                      "application/vnd.geo+json" \
-                                      "application/vnd.ms-fontobject" \
-                                      "application/wasm" \
-                                      "application/x-font-ttf" \
-                                      "application/x-javascript" \
-                                      "application/x-web-app-manifest+json" \
-                                      "application/xhtml+xml" \
-                                      "application/xml" \
-                                      "font/collection" \
-                                      "font/eot" \
-                                      "font/opentype" \
-                                      "font/otf" \
-                                      "font/ttf" \
-                                      "image/bmp" \
-                                      "image/svg+xml" \
-                                      "image/vnd.microsoft.icon" \
-                                      "image/x-icon" \
-                                      "text/cache-manifest" \
-                                      "text/calendar" \
-                                      "text/css" \
-                                      "text/html" \
-                                      "text/javascript" \
-                                      "text/plain" \
-                                      "text/markdown" \
-                                      "text/vcard" \
-                                      "text/vnd.rim.location.xloc" \
-                                      "text/vtt" \
-                                      "text/x-component" \
-                                      "text/x-cross-domain-policy" \
-                                      "text/xml"
-
+        AddOutputFilterByType DEFLATE 
+        "application/atom+xml" \
+        "application/javascript" \
+        "application/json" \
+        "application/ld+json" \
+        "application/manifest+json" \
+        "application/rdf+xml" \
+        "application/rss+xml" \
+        "application/schema+json" \
+        "application/vnd.geo+json" \
+        "application/vnd.ms-fontobject" \
+        "application/wasm" \
+        "application/x-font-ttf" \
+        "application/x-javascript" \
+        "application/x-web-app-manifest+json" \
+        "application/xhtml+xml" \
+        "application/xml" \
+        "font/collection" \
+        "font/eot" \
+        "font/opentype" \
+        "font/otf" \
+        "font/ttf" \
+        "image/bmp" \
+        "image/svg+xml" \
+        "image/vnd.microsoft.icon" \
+        "image/x-icon" \
+        "text/cache-manifest" \
+        "text/calendar" \
+        "text/css" \
+        "text/html" \
+        "text/javascript" \
+        "text/plain" \
+        "text/markdown" \
+        "text/vcard" \
+        "text/vnd.rim.location.xloc" \
+        "text/vtt" \
+        "text/x-component" \
+        "text/x-cross-domain-policy" \
+        "text/xml"
     </IfModule>
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    # Map the following filename extensions to the specified
-    # encoding type in order to make Apache serve the file types
-    # with the appropriate `Content-Encoding` response header
-    # (do note that this will NOT make Apache compress them!).
-    #
-    # If these files types would be served without an appropriate
-    # `Content-Enable` response header, client applications (e.g.:
-    # browsers) wouldn't know that they first need to uncompress
-    # the response, and thus, wouldn't be able to understand the
-    # content.
-    #
-    # https://httpd.apache.org/docs/current/mod/mod_mime.html#addencoding
+# Asignar las siguientes extensiones de nombre de archivo a la especificada
+# tipo de codificación para hacer que Apache sirva los tipos de archivos
+# con el encabezado de respuesta `Content-Encoding` apropiado
+# (¡tenga en cuenta que esto NO hará que Apache los comprima!).
+#
+# Si estos tipos de archivos se publicarían sin un apropiado
+# Encabezado de respuesta `Content-Enable`, aplicaciones de cliente (por ejemplo:
+# browsers) no sabría que primero necesitan descomprimir
+# la respuesta, y por lo tanto, no sería capaz de entender la
+# contenido.
+#
+# https://httpd.apache.org/docs/current/mod/mod_mime.html#addencoding
 
     <IfModule mod_mime.c>
         AddEncoding gzip              svgz
@@ -859,15 +882,15 @@ ServerSignature Off
 </IfModule>
 
 # ----------------------------------------------------------------------
-# | Brotli pre-compressed content                                      |
+# | Contenido precomprimido de Brotli                                  |
 # ----------------------------------------------------------------------
 
-# Serve brotli compressed CSS, JS, HTML, SVG, ICS and JSON files
-# if they exist and if the client accepts br encoding.
+# Sirve archivos comprimidos de brotli CSS, JS, HTML, SVG, ICS y JSON
+# si existen y si el cliente acepta la codificación br.
 #
-# (!) To make this part relevant, you need to generate encoded
-# files by your own. Enabling this part will not auto-generate
-# brotlied files.
+# (!) Para que esta parte sea relevante, debe generar codificada
+# archivos por su cuenta. Habilitar esta parte no se generará automáticamente
+# archivos borrados
 #
 # https://httpd.apache.org/docs/current/mod/mod_brotli.html#precompressed
 
@@ -898,8 +921,8 @@ ServerSignature Off
 #                              .json.br
 #         </IfModule>
 
-#         # Force proxies to cache brotlied and non-brotlied files separately
-#         Header append Vary Accept-Encoding
+# # Forzar proxies para almacenar en caché los archivos brotlied y no brotlied por separado
+# # Encabezado anexar Variar Aceptar-Codificar
 
 #     </FilesMatch>
 
@@ -909,23 +932,23 @@ ServerSignature Off
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | GZip pre-compressed content                                        |
+# | Contenido precomprimido de GZip                                    |
 # ----------------------------------------------------------------------
 
-# Serve gzip compressed CSS, JS, HTML, SVG, ICS and JSON files
-# if they exist and if the client accepts gzip encoding.
+# Sirve archivos CSS comprimidos gzip, JS, HTML, SVG, ICS y JSON
+# si existen y si el cliente acepta la codificación gzip.
 #
-# (!) To make this part relevant, you need to generate encoded
-# files by your own. Enabling this part will not auto-generate
-# gziped files.
+# (!) Para que esta parte sea relevante, debe generar codificada
+# archivos por su cuenta. Habilitar esta parte no se generará automáticamente
+# archivos gziped.
 #
 # https://httpd.apache.org/docs/current/mod/mod_deflate.html#precompressed
 #
 # (1)
-# Removing default MIME Type for .gz files allowing to add custom
-# sub-types.
-# You may prefer using less generic extensions such as .html_gz in
-# order to keep default behavior regarding .gz files.
+# Eliminación del tipo MIME predeterminado para archivos .gz que permite agregar personalizado
+# subtipos.
+# Puede preferir utilizar extensiones menos genéricas como .html_gz en
+# orden para mantener el comportamiento predeterminado con respecto a los archivos .gz.
 # https://httpd.apache.org/docs/current/mod/mod_mime.html#removetype
 
 # <IfModule mod_headers.c>
@@ -934,17 +957,17 @@ ServerSignature Off
 #     RewriteCond %{REQUEST_FILENAME}\.gz -f
 #     RewriteRule \.(css|ics|js|json|html|svg)$ %{REQUEST_URI}.gz [L]
 
-#     # Prevent mod_deflate double gzip
+#     # Prevenir mod_deflate double gzip
 #     RewriteRule \.gz$ - [E=no-gzip:1]
 
 #     <FilesMatch "\.gz$">
 
-#         # Serve correct content types
+#         # Sirve tipos de contenido correctos
 #         <IfModule mod_mime.c>
 #             # (1)
 #             RemoveType gz
 
-#             # Serve correct content types
+#             # Sirve tipos de contenido correctos
 #             AddType text/css              css.gz
 #             AddType text/calendar         ics.gz
 #             AddType text/javascript       js.gz
@@ -952,38 +975,38 @@ ServerSignature Off
 #             AddType text/html             html.gz
 #             AddType image/svg+xml         svg.gz
 
-#             # Serve correct content charset
+#             # Sirve el juego de caracteres correcto
 #             AddCharset utf-8 .css.gz \
 #                              .ics.gz \
 #                              .js.gz \
 #                              .json.gz
 #         </IfModule>
 
-#         # Force proxies to cache gzipped and non-gzipped files separately
-#         Header append Vary Accept-Encoding
+# # Forzar proxies para almacenar en caché los archivos con gzip y sin gzip por separado
+# # Encabezado anexar Variar Aceptar-Codificar
 
 #     </FilesMatch>
 
-#     # Serve correct encoding type
+#     # Sirve el tipo de codificación correcto
 #     AddEncoding gzip .gz
 
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | Content transformation                                             |
+# | Transformación de contenido                                        |
 # ----------------------------------------------------------------------
 
-# Prevent intermediate caches or proxies (e.g.: such as the ones
-# used by mobile network providers) from modifying the website's
-# content.
+# Impedir cachés intermedios o proxies (p. Ej .: como los que están
+# utilizado por los proveedores de redes móviles) de modificar el sitio web
+# contenido.
 #
 # https://tools.ietf.org/html/rfc2616#section-14.9.5
 #
-# (!) If you are using `mod_pagespeed`, please note that setting
-# the `Cache-Control: no-transform` response header will prevent
-# `PageSpeed` from rewriting `HTML` files, and, if the
-# `ModPagespeedDisableRewriteOnNoTransform` directive isn't set
-# to `off`, also from rewriting other resources.
+# (!) Si está utilizando `mod_pagespeed`, tenga en cuenta que la configuración
+# el encabezado de respuesta `Cache-Control: no-transform` evitará
+# `PageSpeed` de la reescritura de archivos` HTML`, y, si
+# `Directiva ModPagespeedDisableRewriteOnNoTransform` no está configurada
+# a `off`, también de la reescritura de otros recursos.
 #
 # https://developers.google.com/speed/pagespeed/module/configuration#notransform
 
@@ -995,7 +1018,7 @@ ServerSignature Off
 # | ETags                                                              |
 # ----------------------------------------------------------------------
 
-# Remove `ETags` as resources are sent with far-future expires headers.
+# Quite `ETags` ya que los recursos se envían con encabezados de futuro lejano.
 #
 # https://developer.yahoo.com/performance/rules.html#etags
 # https://tools.ietf.org/html/rfc7232#section-2.3
@@ -1008,14 +1031,14 @@ ServerSignature Off
 FileETag None
 
 # ----------------------------------------------------------------------
-# | Expires headers                                                    |
+# | Caduca los encabezados                                             |
 # ----------------------------------------------------------------------
 
-# Serve resources with far-future expires headers.
+# Servir recursos con un futuro lejano expira encabezados.
 #
-# (!) If you don't control versioning with filename-based
-# cache busting, you should consider lowering the cache times
-# to something like one week.
+# (!) Si no controla el control de versiones con nombre de archivo
+# prevención de la memoria caché, debería considerar reducir los tiempos de caché
+# a algo así como una semana.
 #
 # https://httpd.apache.org/docs/current/mod/mod_expires.html
 
@@ -1026,10 +1049,10 @@ FileETag None
 
   # CSS
 
-    ExpiresByType text/css                              "access plus 1 year"
+    ExpiresByType text/css                              "access plus 1 week"
 
 
-  # Data interchange
+  # Intercambio de datos
 
     ExpiresByType application/atom+xml                  "access plus 1 hour"
     ExpiresByType application/rdf+xml                   "access plus 1 hour"
@@ -1044,7 +1067,7 @@ FileETag None
     ExpiresByType text/xml                              "access plus 0 seconds"
 
 
-  # Favicon (cannot be renamed!) and cursor images
+# Favicon (no se puede cambiar el nombre!) Y las imágenes del cursor
 
     ExpiresByType image/vnd.microsoft.icon              "access plus 1 week"
     ExpiresByType image/x-icon                          "access plus 1 week"
@@ -1056,9 +1079,9 @@ FileETag None
 
   # JavaScript
 
-    ExpiresByType application/javascript                "access plus 1 year"
-    ExpiresByType application/x-javascript              "access plus 1 year"
-    ExpiresByType text/javascript                       "access plus 1 year"
+    ExpiresByType application/javascript                "access plus 1 month"
+    ExpiresByType application/x-javascript              "access plus 1 month"
+    ExpiresByType text/javascript                       "access plus 1 month"
 
 
   # Manifest files
@@ -1089,7 +1112,7 @@ FileETag None
 
   # WebAssembly
 
-    ExpiresByType application/wasm                      "access plus 1 year"
+    ExpiresByType application/wasm                      "access plus 1 month"
 
 
   # Web fonts
@@ -1126,21 +1149,21 @@ FileETag None
 </IfModule>
 
 # ----------------------------------------------------------------------
-# | File concatenation                                                 |
+# | Concatenación de archivos                                          |
 # ----------------------------------------------------------------------
 
-# Allow concatenation from within specific files.
+# Permitir la concatenación desde archivos específicos.
 #
-# e.g.:
+# p.ej.:
 #
-#   If you have the following lines in a file called, for
-#   example, `main.combined.js`:
+# Si tiene las siguientes líneas en un archivo llamado, para
+# ejemplo, `main.combined.js`:
 #
-#       <!--#include file="js/jquery.js" -->
-#       <!--#include file="js/jquery.timer.js" -->
+# <! - # include file = "js / jquery.js" ->
+# <! - # include file = "js / jquery.timer.js" ->
 #
-#   Apache will replace those lines with the content of the
-#   specified files.
+# Apache reemplazará esas líneas con el contenido de la
+# archivos especificados
 
 # <IfModule mod_include.c>
 #     <FilesMatch "\.combined\.js$">
@@ -1158,15 +1181,15 @@ FileETag None
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | Filename-based cache busting                                       |
+# | Revestimiento de caché basado en nombre de archivo                 |
 # ----------------------------------------------------------------------
 
-# If you're not using a build process to manage your filename version
-# revving, you might want to consider enabling the following directives
-# to route all requests such as `/style.12345.css` to `/style.css`.
+# Si no está utilizando un proceso de compilación para administrar su versión de nombre de archivo
+# revoluciones, es posible que desee considerar habilitar las siguientes directivas
+# para enrutar todas las solicitudes, como `/ style.12345.css` a` / style.css`.
 #
-# To understand why this is important and even a better solution than
-# using something like `*.css?v231`, please see:
+# Comprender por qué esto es importante e incluso una mejor solución que
+# usando algo como `* .css? v231`, por favor mira:
 # http://www.stevesouders.com/blog/2008/08/23/revving-filenames-dont-use-querystring/
 
 # <IfModule mod_rewrite.c>
