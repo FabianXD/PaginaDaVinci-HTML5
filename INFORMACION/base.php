@@ -28,6 +28,18 @@
             <!-- contenido de la noticia -->
             <div class="tdnoticia">
                 contenido
+
+                <table class="tablaremar">
+            <tr>
+                <td COLSPAN="4" class="textalingcenter"><div class="autocenter"><b >ACTIVIDADES EXTRAESCOLARES  1° SEM 2017</b></div></td>
+            </tr>
+            <tr>
+                <td>ACTUVUDAD</td>
+                <td>PROFESOR</td>
+                <td>NIVEL</td>
+                <td>DIA Y HORA</td>
+            </tr>
+            </table>
             </div>
         </article>
     </main>

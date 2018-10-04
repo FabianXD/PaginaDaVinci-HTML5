@@ -13,36 +13,36 @@
                             <li><a href="index.html">&nbsp;Portada</a></li>
                             <li><a href="#">&nbsp;&nbsp;Leonardo Da Vinci School</a>
                                 <ul>
-                                    <li><a href="../INFORMACION/QUIENES_SOMOS.php">&nbsp;&bull;&nbsp;&nbsp;Quienes Somos</a></li>
-                                    <li><a href="../INFORMACION/HISTORIAS.php">&nbsp;&bull;&nbsp;&nbsp;Historia</a></li>
-                                    <li><a href="../INFORMACION/MENSAJE.php">&nbsp;&bull;&nbsp;&nbsp;Mensaje de la Directora</a></li>
-                                    <li><a href="../INFORMACION/LOGROS.php">&nbsp;&bull;&nbsp;&nbsp;Nuestros Logros</a></li>
-                                    <li><a href="../INFORMACION/ALUMNOS_INTEGRALES.php">&nbsp;&bull;&nbsp;&nbsp;Alumnos Integrales</a></li>
-                                    <li><a href="../INFORMACION/ORGANIGRAMA.php">&nbsp;&bull;&nbsp;&nbsp;Organigrama</a></li>
+                                    <li><a href="../INFORMACION/QUIENES_SOMOS">&nbsp;&bull;&nbsp;&nbsp;Quienes Somos</a></li>
+                                    <li><a href="../INFORMACION/HISTORIAS">&nbsp;&bull;&nbsp;&nbsp;Historia</a></li>
+                                    <li><a href="../INFORMACION/MENSAJE">&nbsp;&bull;&nbsp;&nbsp;Mensaje de la Directora</a></li>
+                                    <li><a href="../INFORMACION/LOGROS">&nbsp;&bull;&nbsp;&nbsp;Nuestros Logros</a></li>
+                                    <li><a href="../INFORMACION/ALUMNOS_INTEGRALES">&nbsp;&bull;&nbsp;&nbsp;Alumnos Integrales</a></li>
+                                    <li><a href="../INFORMACION/ORGANIGRAMA">&nbsp;&bull;&nbsp;&nbsp;Organigrama</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">&nbsp;Programa Educativo</a>
                                 <ul>
-                                    <li><a href="../INFORMACION/PEI.php">&nbsp;&bull;&nbsp;&nbsp;PEI</a></li>
-                                    <li><a href="../INFORMACION/NIVELES_EDUCACIONANES.php">&nbsp;&bull;&nbsp;&nbsp;Niveles de Educacion</a></li>
-                                    <li><a href="../INFORMACION/ACTIVIDADES_EXTRAESCOLARES.php">&nbsp;&bull;&nbsp;&nbsp;Actividades Extraescolares</a></li>
-                                    <li><a href="../INFORMACION/REGLAMENTOS.php">&nbsp;&bull;&nbsp;&nbsp;Reglamentos</a></li>
+                                    <li><a href="../INFORMACION/PEI">&nbsp;&bull;&nbsp;&nbsp;PEI</a></li>
+                                    <li><a href="../INFORMACION/NIVELES_EDUCACIONANES">&nbsp;&bull;&nbsp;&nbsp;Niveles de Educacion</a></li>
+                                    <li><a href="../INFORMACION/ACTIVIDADES_EXTRAESCOLARES">&nbsp;&bull;&nbsp;&nbsp;Actividades Extraescolares</a></li>
+                                    <li><a href="../INFORMACION/REGLAMENTOS">&nbsp;&bull;&nbsp;&nbsp;Reglamentos</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">&nbsp;Admiciones</a>
                                 <ul>
-                                    <li><a href="../INFORMACION/REQUISITOS_INGRESO.php">&nbsp;&bull;&nbsp;&nbsp;Requisitos de Ingreso</a></li>
-                                    <li><a href="../INFORMACION/PREGUNTAS_FRECUENTES.php">&nbsp;&bull;&nbsp;&nbsp;Preguntas Frecuentes</a></li>
-                                    <li><a href="../INFORMACION/CONTACTO.php">&nbsp;&bull;&nbsp;&nbsp;Contacto</a></li>
+                                    <li><a href="../INFORMACION/REQUISITOS_INGRESO">&nbsp;&bull;&nbsp;&nbsp;Requisitos de Ingreso</a></li>
+                                    <li><a href="../INFORMACION/PREGUNTAS_FRECUENTES">&nbsp;&bull;&nbsp;&nbsp;Preguntas Frecuentes</a></li>
+                                    <li><a href="../INFORMACION/CONTACTO">&nbsp;&bull;&nbsp;&nbsp;Contacto</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">&nbsp;Soporte Estudiantil</a>
                                 <ul>
-                                    <li><a href="../INFORMACION/MATERIALES_APOYO.php">&nbsp;&bull;&nbsp;&nbsp;Materiales de Apoyo</a></li>
-                                    <li><a href="../INFORMACION/PLAN_LECTOR.php">&nbsp;&bull;&nbsp;&nbsp;Plan Lector</a></li>
-                                    <li><a href="../INFORMACION/UTILES_ESCOLARES.php">&nbsp;&bull;&nbsp;&nbsp;Lista de Utiles Escolares</a></li>
-                                    <li><a href="../INFORMACION/UNIFORME_ESCOLAR.php">&nbsp;&bull;&nbsp;&nbsp;Uniforme Escolar</a></li>
-                                    <li><a href="../INFORMACION/SITIOS_INTERES.php">&nbsp;&bull;&nbsp;&nbsp;Sitios de interes</a></li>
+                                    <li><a href="../INFORMACION/MATERIALES_APOYO">&nbsp;&bull;&nbsp;&nbsp;Materiales de Apoyo</a></li>
+                                    <li><a href="../INFORMACION/PLAN_LECTOR">&nbsp;&bull;&nbsp;&nbsp;Plan Lector</a></li>
+                                    <li><a href="../INFORMACION/UTILES_ESCOLARES">&nbsp;&bull;&nbsp;&nbsp;Lista de Utiles Escolares</a></li>
+                                    <li><a href="../INFORMACION/UNIFORME_ESCOLAR">&nbsp;&bull;&nbsp;&nbsp;Uniforme Escolar</a></li>
+                                    <li><a href="../INFORMACION/SITIOS_INTERES">&nbsp;&bull;&nbsp;&nbsp;Sitios de interes</a></li>
                                 </ul>
                             </li>
                         </ul>

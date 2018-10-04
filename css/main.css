@@ -404,6 +404,13 @@ a:active {
     margin: 10px;
 }
 
+.imgnivel {
+    float: left;
+    width: 45%;
+    height: auto;
+    margin: 10px;
+}
+
 .flatleft {
     float: left;
 }
@@ -444,12 +451,12 @@ a:active {
     -moz-border-radius: 20px 20px 20px 20px;
     -webkit-border-radius: 20px 20px 20px 20px;
     border: 5px solid #831A38;
-    background-color: #FFEBDD;
+    background-color: rgb(255, 235, 221);
     width: 100%;
 }
 
 .tablaremar td {
-    font-size: 12px;
+    font-size: 14px;
     text-align: left;
     border: 1px solid #831A38;
     width: auto;
@@ -460,11 +467,33 @@ a:active {
 .textalingcenter {
     font-size: 14px;
     text-align: center;
+    align-content: center;
+}
+
+.autocenter {
+    width: 100%;
+    text-align: center;
+    align-content: center;
 }
 
 .imgextra {
     width: 95%;
     height: auto;
+}
+
+.imgper {
+    float: left;
+    width: 90px;
+    height: 125px;
+}
+
+.imgorga {
+    width: 100%;
+    height: auto;
+}
+
+.margen2 {
+    margin: 5%;
 }
 
 
