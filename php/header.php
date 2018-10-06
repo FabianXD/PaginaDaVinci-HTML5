@@ -14,7 +14,7 @@
                             <li><a href="#">&nbsp;&nbsp;Leonardo Da Vinci School</a>
                                 <ul>
                                     <li><a href="../INFORMACION/QUIENES_SOMOS">&nbsp;&bull;&nbsp;&nbsp;Quienes Somos</a></li>
-                                    <li><a href="../INFORMACION/HISTORIAS">&nbsp;&bull;&nbsp;&nbsp;Historia</a></li>
+                                    <li><a href="../INFORMACION/HISTORIA">&nbsp;&bull;&nbsp;&nbsp;Historia</a></li>
                                     <li><a href="../INFORMACION/MENSAJE">&nbsp;&bull;&nbsp;&nbsp;Mensaje de la Directora</a></li>
                                     <li><a href="../INFORMACION/LOGROS">&nbsp;&bull;&nbsp;&nbsp;Nuestros Logros</a></li>
                                     <li><a href="../INFORMACION/ALUMNOS_INTEGRALES">&nbsp;&bull;&nbsp;&nbsp;Alumnos Integrales</a></li>

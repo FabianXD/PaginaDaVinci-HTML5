@@ -319,7 +319,7 @@ a:active {
 .titulo_noticias3 {
     text-align: left;
     font-family: "Trebuchet MS";
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
     color: #FF6600;
@@ -487,13 +487,40 @@ a:active {
     height: 125px;
 }
 
+.imgpers {
+    float: left;
+    width: 80px;
+    height: 100px;
+}
+
+.imgbio {
+    float: left;
+    width: 260px;
+    height: auto;
+}
+
+.imgpers2 {
+    float: left;
+    width: 90px;
+    height: 90px;
+}
+
 .imgorga {
     width: 100%;
     height: auto;
 }
 
+imghist {
+    width: 100%;
+    height: auto;
+}
+
 .margen2 {
-    margin: 5%;
+    margin: 10px;
+}
+
+.margenjusti {
+    text-align: justify;
 }
 
 
